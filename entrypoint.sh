@@ -2,7 +2,7 @@
 
 # Attendre que la base soit prête (optionnel)
 python manage.py migrate --noinput
-python manage.py collectstatic --noinput --clear
+python manage.py collectstatic --noinput --clear --verbosity 2
 if [ $? -eq 0 ]; then
     echo "✅ collectstatic réussi"
 else
