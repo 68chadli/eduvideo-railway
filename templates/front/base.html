@@ -86,6 +86,19 @@
             border-left: 4px solid #f59e0b;
             color: #92400e;
         }
+        /* Animation d’attention pour le message panier */
+        .alert-pulse {
+            animation: pulse 1s ease-in-out 3;
+            font-weight: bold;
+            background-color: #ffedd5 !important;  /* orange clair */
+            border-left: 4px solid #f97316 !important;
+            color: #7c2d12 !important;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); background-color: #ffedd5; }
+            50% { transform: scale(1.01); background-color: #fed7aa; border-left-width: 6px; }
+            100% { transform: scale(1); background-color: #ffedd5; }
+        }
     </style>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
