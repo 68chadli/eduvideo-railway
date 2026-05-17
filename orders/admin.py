@@ -45,7 +45,7 @@ class CommandeAdmin(admin.ModelAdmin):
                         utilisateur=commande.utilisateur,
                         pack=cp.pack
                     )
-                # self.envoyer_email_confirmation(commande)
+                self.envoyer_email_confirmation(commande)
         self.message_user(request, f"{queryset.count()} commande(s) activée(s)")
     activer_commandes.short_description = "Activer les commandes sélectionnées"
     
