@@ -167,7 +167,11 @@
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} mb-4">
                     <i class="fas fa-{% if message.tags == 'success' %}check-circle{% elif message.tags == 'error' %}exclamation-circle{% else %}info-circle{% endif %} mr-2"></i>
-                    {{ message }}
+                    {% if 'strong' in message.extra_tags %}
+                        <strong>{{ message|safe }}</strong>
+                    {% else %}
+                        {{ message }}
+                    {% endif %}
                 </div>
             {% endfor %}
         {% endif %}
@@ -205,17 +209,6 @@
             });
         }
         
-        // Faire disparaître les messages après 5 secondes
-        setTimeout(function() {
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(function(alert) {
-                alert.style.transition = 'opacity 0.5s';
-                alert.style.opacity = '0';
-                setTimeout(function() {
-                    alert.remove();
-                }, 500);
-            });
-        }, 5000);
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

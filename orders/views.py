@@ -77,7 +77,8 @@ def add_to_cart(request, pack_id):
     cart.append(pack_id)
     request.session['cart'] = cart
     messages.success(request, f"{pack.nom} ajouté au panier")
-    messages.success(request, f"{pack.nom} a été ajouté à votre panier. Allez dans le menu 🛒 Panier pour finaliser votre commande.")
+    messages.success(request, f"✅{pack.nom} a été ajouté à votre panier. Allez dans le menu 🛒 Panier pour finaliser votre commande.</strong>",
+    extra_tags='strong persistent')
     return redirect('courses:pack_detail', pack_id=pack_id)
 
 @login_required
