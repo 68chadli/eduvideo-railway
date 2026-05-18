@@ -1,13 +1,19 @@
 #!/bin/sh
 
-# Attendre que la base soit prête (optionnel)
+# Migrations
 python manage.py migrate --noinput
-python manage.py collectstatic --noinput --clear --verbosity 2
-if [ $? -eq 0 ]; then
-    echo "✅ collectstatic réussi"
+
+# Collectstatic (sauf si désactivé)
+if [ "$DISABLE_COLLECTSTATIC" != "1" ]; then
+    python manage.py collectstatic --noinput --clear --verbosity 2
+    if [ $? -eq 0 ]; then
+        echo "✅ collectstatic réussi"
+    else
+        echo "❌ collectstatic a échoué"
+        exit 1
+    fi
 else
-    echo "❌ collectstatic a échoué"
-    exit 1
+    echo "⚠️ collectstatic désactivé (DISABLE_COLLECTSTATIC=1)"
 fi
 
 # Créer un superutilisateur automatiquement (si non existant)
