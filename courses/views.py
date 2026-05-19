@@ -5,9 +5,9 @@ from .models import Annee, Specialite, Matiere, Pack, Video, PackVideo
 from orders.models import AccesPack  # ← Ajoutez cet import en haut
 from django.db import models  # Pour les Q objects
 from django.utils import timezone
-from django.http import FileResponse, Http404
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
+from django.http import FileResponse, Http404, HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect
 
 
 

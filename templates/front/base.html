@@ -246,5 +246,13 @@
             easing: 'ease-in-out'
         });
     </script>
+    <script>
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'VIDEO') {
+            e.preventDefault();
+            return false;
+        }
+    });
+</script>
 </body>
 </html>

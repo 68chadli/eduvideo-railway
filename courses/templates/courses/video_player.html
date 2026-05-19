@@ -8,8 +8,8 @@
     
     <div class="aspect-video bg-black rounded-lg overflow-hidden">
         {% if video.fichier_video %}
-            <!-- Vidéo locale (fichier uploadé) - lecture via vue protégée -->
-            <video controls class="w-full h-full" controlsList="nodownload">
+            <!-- Vidéo locale (fichier uploadé) -->
+            <video controls controlsList="nodownload" class="w-full h-full" oncontextmenu="return false;">
                 <source src="{{ video.fichier_video.url }}" type="video/mp4">
                 Votre navigateur ne supporte pas la lecture vidéo.
             </video>
