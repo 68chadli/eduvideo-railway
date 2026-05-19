@@ -10,4 +10,5 @@ path('matieres/<int:annee_id>/<int:specialite_id>/', views.matiere_list, name='m
 path('packs/<int:annee_id>/<int:specialite_id>/<int:matiere_id>/', views.pack_list, name='pack_list'),
 path('pack/<int:pack_id>/', views.pack_detail, name='pack_detail'),
 path('video/<int:video_id>/', views.video_player, name='video_player'),
+path('video-stream/<int:video_id>/', views.video_stream, name='video_stream'),
 ]

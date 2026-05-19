@@ -5,7 +5,38 @@ from .models import Annee, Specialite, Matiere, Pack, Video, PackVideo
 from orders.models import AccesPack  # ← Ajoutez cet import en haut
 from django.db import models  # Pour les Q objects
 from django.utils import timezone
+from django.http import FileResponse, Http404
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 
+
+
+@login_required
+def video_stream(request, video_id):
+    video = get_object_or_404(Video, id=video_id)
+    
+    # Vérifier si l'utilisateur a accès à cette vidéo
+    if not request.user.is_authenticated:
+        return redirect('accounts:login')
+    
+    # Vérifier accès via pack acheté
+    pack_video = PackVideo.objects.filter(video=video).first()
+    if not pack_video:
+        raise Http404
+    
+    acces = AccesPack.objects.filter(
+        utilisateur=request.user,
+        pack=pack_video.pack
+    ).first()
+    
+    if not acces and not pack_video.est_video_explicative:
+        return HttpResponseForbidden("Vous n'avez pas accès à cette vidéo.")
+    
+    # Servir le fichier vidéo
+    if not video.fichier_video:
+        raise Http404
+    
+    return FileResponse(video.fichier_video.open(), content_type='video/mp4')
 def annee_list(request):
     annees = Annee.objects.all()
     breadcrumbs = [
