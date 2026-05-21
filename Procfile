@@ -1,1 +1,1 @@
-web: python manage.py migrate --noinput && gunicorn core.wsgi:application
+web: if [ "$RUN_MIGRATIONS" = "1" ]; then python manage.py migrate --noinput; fi && gunicorn core.wsgi:application
